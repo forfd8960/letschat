@@ -12,8 +12,8 @@ message User {
 message ChatMessage {
     string id = 1;
     User user = 2;
-    string content = 2;
-    google.protobuf.Timestamp created_at = 3;
+    string content = 3;
+    google.protobuf.Timestamp created_at = 4;
 }
 
 message ChatGroup {
@@ -40,10 +40,27 @@ message CreateGroup {
     string group_name = 2;
 }
 
+message JoinGroup {
+    string user_id = 1;
+}
+
+message SendMessage {
+    string user_id = 1;
+    string content = 2;
+}
+
+message LeaveGroup {
+    string user_id = 1;
+    string group_id = 2;
+}
+
 message ChatCommand {
     oneof Command {
         Register register = 1;
         CreateGroup create_group = 2;
+        JoinGroup join_group = 3;
+        SendMessage send_msg = 4;
+        LeaveGroup leave_group = 5;
     }
 }
 
