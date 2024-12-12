@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package chat;
+
+message User {
+    string id = 1;
+    string name = 2;
+}
+
+message ChatMessage {
+    string id = 1;
+    User user = 2;
+    string content = 2;
+    google.protobuf.Timestamp created_at = 3;
+}
+
+message ChatGroup {
+    string id = 1;
+    string name = 2;
+    User creator = 3;
+    repeated User members = 4;
+}
+
+// enum Command {
+//     CMD_REGISTER = 0;
+//     CMD_CREATE_GROUP = 0;
+//     CMD_JOIN_GROUP = 1;
+//     CMD_SNED_MESSAGE = 2;
+//     CMD_LEAVE_GROUP = 3;
+// }
+
+message Register {
+    string name = 1;
+}
+
+message CreateGroup {
+    string user_id = 1;
+    string group_name = 2;
+}
+
+message ChatCommand {
+    oneof Command {
+        Register register = 1;
+        CreateGroup create_group = 2;
+    }
+}
+
