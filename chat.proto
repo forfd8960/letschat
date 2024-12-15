@@ -5,19 +5,19 @@ import "google/protobuf/timestamp.proto";
 package chat;
 
 message User {
-    string id = 1;
+    int64 id = 1;
     string name = 2;
 }
 
 message ChatMessage {
-    string id = 1;
+    int64 id = 1;
     User user = 2;
     string content = 3;
     google.protobuf.Timestamp created_at = 4;
 }
 
 message ChatGroup {
-    string id = 1;
+    int64 id = 1;
     string name = 2;
     User creator = 3;
     repeated User members = 4;
@@ -36,22 +36,23 @@ message Register {
 }
 
 message CreateGroup {
-    string user_id = 1;
+    int64 user_id = 1;
     string group_name = 2;
 }
 
 message JoinGroup {
-    string user_id = 1;
+    int64 user_id = 1;
 }
 
 message SendMessage {
-    string user_id = 1;
-    string content = 2;
+    int64 group_id = 1;
+    int64 user_id = 2;
+    string content = 3;
 }
 
 message LeaveGroup {
-    string user_id = 1;
-    string group_id = 2;
+    int64 user_id = 1;
+    int64 group_id = 2;
 }
 
 message ChatCommand {
@@ -64,3 +65,33 @@ message ChatCommand {
     }
 }
 
+message ChatCommandResp {
+    oneof CommandResp {
+        Register register = 1;
+        CreateGroup create_group = 2;
+        JoinGroup join_group = 3;
+        SendMessage send_msg = 4;
+        LeaveGroup leave_group = 5;
+    }
+}
+
+message RegisterResp {
+    User user = 1;
+}
+
+message CreateGroupResp {
+    ChatGroup chat_group = 1;
+}
+
+message JoinGroupResp {
+    string msg = 1;
+}
+
+message SendMessageResp {
+    int64 user_id = 1;
+    string content = 2;
+}
+
+message LeaveGroupResp {
+    string msg = 1;
+}
