@@ -7,11 +7,32 @@ edition = "2021"
 prost = "0.13.1"
 bytes = "1.7.1"
 prost-types = "0.13.1"
+anyhow = "1.0.83"
+thiserror = "1.0.60"
+enum_dispatch = "0.3.13"
+dashmap = "6.0.1"
+lazy_static = "1.5.0"
+tokio-util = { version = "0.7.13", features = ["codec"] }
+tokio = { version = "1.42.0", features = [
+    "rt",
+    "rt-multi-thread",
+    "macros",
+    "net",
+] }
+tokio-stream = "0.1.17"
+futures = "0.3.30"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
 [build-dependencies]
 anyhow = "1.0.86"
-prost-build = { version="0.13.1" }
+prost-build = { version = "0.13.1" }
 
 [[bin]]
 name = "client"
 path = "src/client/main.rs"
+
+
+[[bin]]
+name="broadcast"
+path="src/examples/broadcast.rs"
